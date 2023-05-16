@@ -107,12 +107,12 @@ export default class PlayerController
     {
     this.sprite.anims.create({
       key: 'player-idle',
-      frames: [{key:'player', frame:'tile_0240.png'}]
+      frames: [{key:'player-idle', frame:'player-idle-1.png'},{key:'player-idle', frame:'player-idle-2.png'},{key:'player-idle', frame:'player-idle-3.png'},{key:'player-idle', frame:'player-idle-4.png'}]
     })
     
     this.sprite.anims.create({
       key: 'player-jump',
-      frames: [{key:'player', frame:'tile_0247.png'}]
+      frames: [{key:'player-jump', frame:'player-jump-1.png'},{key:'player-jump', frame:'player-jump-2.png'}]
     })
     
     this.sprite.anims.create({
@@ -122,7 +122,8 @@ export default class PlayerController
     
     this.sprite.anims.create({
       key: 'player-walk',
-      frames: [{key:'player', frame:'tile_0244.png'},{key:'player', frame:'tile_0241.png'},{key:'player', frame:'tile_0242.png'},{key:'player', frame:'tile_0243.png'}],
+      frames: [{key:'player-run', frame:'player-run-1.png'},{key:'player-run', frame:'player-run-2.png'},{key:'player-run', frame:'player-run-3.png'},
+      {key:'player-run', frame:'player-run-4.png'},{key:'player-run', frame:'player-run-5.png'},{key:'player-run', frame:'player-run-6.png'}],
       repeat: -1 //para repetir todo el tiempo
     })
     }

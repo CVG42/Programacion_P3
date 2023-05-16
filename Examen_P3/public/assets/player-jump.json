@@ -1,0 +1,65 @@
+{
+  "frames": [
+    {
+      "filename": "player-jump-1.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 23,
+        "h": 21
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 4,
+        "y": 9,
+        "w": 23,
+        "h": 21
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "player-jump-2.png",
+      "frame": {
+        "x": 23,
+        "y": 0,
+        "w": 21,
+        "h": 22
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 5,
+        "y": 7,
+        "w": 21,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "player-jump.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 45,
+      "h": 21
+    },
+    "scale": 1
+  }
+}

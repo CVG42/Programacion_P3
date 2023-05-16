@@ -1,0 +1,165 @@
+{
+  "frames": [
+    {
+      "filename": "player-run-2.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 5,
+        "y": 9,
+        "w": 20,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "player-run-1.png",
+      "frame": {
+        "x": 0,
+        "y": 22,
+        "w": 18,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 10,
+        "w": 18,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "player-run-3.png",
+      "frame": {
+        "x": 0,
+        "y": 44,
+        "w": 18,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 10,
+        "w": 18,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "player-run-4.png",
+      "frame": {
+        "x": 0,
+        "y": 66,
+        "w": 18,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 7,
+        "y": 10,
+        "w": 18,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "player-run-6.png",
+      "frame": {
+        "x": 0,
+        "y": 88,
+        "w": 18,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 7,
+        "y": 10,
+        "w": 18,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "player-run-5.png",
+      "frame": {
+        "x": 0,
+        "y": 110,
+        "w": 17,
+        "h": 22
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 9,
+        "w": 17,
+        "h": 22
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "player-run.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 20,
+      "h": 132
+    },
+    "scale": 1
+  }
+}

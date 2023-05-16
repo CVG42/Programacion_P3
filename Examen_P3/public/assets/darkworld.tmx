@@ -189,7 +189,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objetos">
-  <object id="1" name="Player-spawn" x="16.1667" y="224.25" width="16" height="32.25"/>
+  <object id="1" name="Player-spawn" x="15.6667" y="255" width="16" height="16"/>
   <object id="6" name="Joya" x="96" y="192.25" width="16" height="15.75"/>
   <object id="7" name="Joya" x="224" y="128" width="16" height="15.75"/>
   <object id="8" name="Joya" x="239.5" y="223.75" width="16" height="15.75"/>

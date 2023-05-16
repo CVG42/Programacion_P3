@@ -39,15 +39,15 @@
          "name":"Objetos",
          "objects":[
                 {
-                 "height":32.25,
+                 "height":16,
                  "id":1,
                  "name":"Player-spawn",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":16.1667,
-                 "y":224.25
+                 "x":15.6667,
+                 "y":255
                 }, 
                 {
                  "height":15.75,

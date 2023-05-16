@@ -37,6 +37,9 @@ export class Sidescroller extends Phaser.Scene {
     this.load.image('joya-img','/assets/tile_0082.png');
     this.load.atlas('enemy', '/assets/enemy.png','/assets/enemy.json')
     this.load.atlas('fly-enemy','/assets/flyenemy.png','/assets/flyenemy.json')
+    this.load.atlas('player-run','/assets/player-run.png','/assets/player-run.json')
+    this.load.atlas('player-idle','/assets/player-idle.png','/assets/player-idle.json')
+    this.load.atlas('player-jump','/assets/player-jump.png','/assets/player-jump.json')
   }
  
   create(){
