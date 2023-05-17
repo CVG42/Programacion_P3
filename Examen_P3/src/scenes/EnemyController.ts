@@ -43,11 +43,11 @@ export default class EnemyController
     if(!this.Waiting && this.moveTime > 0){
       this.moveTime -= dt;
       if(this.goingRight){
-        this.sprite.flipX = false;
+        this.sprite.flipX = true;
         this.sprite.setVelocityX(this.speed);
         this.sprite.play('enemy-caminar',true);
       }else{
-        this.sprite.flipX = true;
+        this.sprite.flipX = false;
         this.sprite.setVelocityX(-this.speed);
         this.sprite.play('enemy-caminar',true);
       }
@@ -66,22 +66,26 @@ export default class EnemyController
 	{
 		this.sprite.anims.create({
 			key: 'enemy-neutral',
-			frames: [{ key: 'enemy', frame: 'tile_0323.png' }]
+			frames: [{ key: 'enemy', frame: 'opossum-1.png' }]
 		})
 
 		this.sprite.anims.create({
 			key: 'enemy-caminar',
 			frameRate:12,
       frames: [
-        {key:'enemy', frame:"tile_0321.png"},
-        {key:'enemy', frame:"tile_0320.png"},
-        {key:'enemy', frame:"tile_0322.png"}],
+        {key:'enemy', frame:"opossum-1.png"},
+        {key:'enemy', frame:"opossum-2.png"},
+        {key:'enemy', frame:"opossum-3.png"},
+        {key:'enemy', frame:"opossum-4.png"},
+        {key:'enemy', frame:"opossum-5.png"},
+        {key:'enemy', frame:"opossum-6.png"}],
       repeat:-1 //infinite
 		})
 
 		this.sprite.anims.create({
 			key: 'enemy-die',
-			frames: [{ key: 'enemy', frame: 'tile_0324.png' }]
+			frames: [{ key: 'enemy-death', frame: 'enemy-death-1.png' }, { key: 'enemy-death', frame: 'enemy-death-2.png' },{ key: 'enemy-death', frame: 'enemy-death-3.png' }
+			,{ key: 'enemy-death', frame: 'enemy-death-4.png' },{ key: 'enemy-death', frame: 'enemy-death-5.png' },{ key: 'enemy-death', frame: 'enemy-death-6.png' }]
 		})
 	}
 
@@ -99,8 +103,6 @@ export default class EnemyController
 
     this.scene.tweens.add({ //animacion que lo apachurra cada vez mas
 			targets: this.sprite,
-			displayHeight: 0,
-			y: this.sprite.y + (this.sprite.displayHeight * 0.5),
 			duration: 200,
 			onComplete: () => {
 				this.sprite.destroy() //destruimos y ya no podremos usar denuevo

@@ -34,11 +34,13 @@ export class Sidescroller extends Phaser.Scene {
   {
     //this.load.image('mapa','/assets/monochrome_tilemap_transparent_packed.png');
     this.load.image('mapa','/assets/tileset_forest.png');
-    //this.load.image('background','/assets/desert_b.png');
+    this.load.image('background','/assets/desert_b.png');
     this.load.tilemapTiledJSON('tilemap','/assets/forest.json');
-    this.load.image('joya-img','/assets/tile_0082.png');
-    this.load.atlas('enemy', '/assets/enemy.png','/assets/enemy.json')
-    this.load.atlas('fly-enemy','/assets/flyenemy.png','/assets/flyenemy.json')
+    this.load.image('joya-img','/assets/gem-1.png');
+    this.load.image('item-img','/assets/cherry-1.png');
+    this.load.atlas('enemy', '/assets/opposum.png','/assets/opposum.json')
+    this.load.atlas('enemy-death', '/assets/death-e.png','/assets/death-e.json')
+    this.load.atlas('fly-enemy','/assets/saw.png','/assets/saw.json')
     this.load.atlas('player-run','/assets/player-run.png','/assets/player-run.json')
     this.load.atlas('player-idle','/assets/player-idle.png','/assets/player-idle.json')
     this.load.atlas('player-jump','/assets/player-jump.png','/assets/player-jump.json')
@@ -51,13 +53,13 @@ export class Sidescroller extends Phaser.Scene {
     
     //para cargar otra escena al mismo tiempo, en este caso de UI
     this.scene.launch('UIScene');
-    
+
+    const background = this.make.tilemap({key:'tilemap'});
+    const bg = background.addTilesetImage('desert','background');
+    const fondo = background.createLayer('Fondo', bg!);
     const map = this.make.tilemap({key:'tilemap'});
     const tileset = map.addTilesetImage('forest','mapa'); //'darkworld' = conjunto de patrones en tiled
     const ground = map.createLayer('Suelo', tileset!);
-    //const background = this.make.tilemap({key:'tilemap'});
-    //const bg = background.addTilesetImage('desert','background');
-    //const fondo = background.createLayer('Fondo', bg!);
     
 
     //colisiones de Tilemap
@@ -85,6 +87,12 @@ export class Sidescroller extends Phaser.Scene {
           joya.setData('tipo','joya')
         break;
 
+        case 'Item':
+          const item = this.matter.add.sprite(x! + (width * 0.5), y! + (height * 0.5), 'item-img', undefined, {isSensor:true,isStatic:true})
+          //isSensor = isTrigger de unity
+          item.setData('tipo','item')
+        break;
+
         case 'picos':
           const pico = this.matter.add.rectangle(x! + (width * 0.5), y! + (height * 0.5), width,height, {isStatic:true})
           this.Obstaculos.add('picos',pico);
@@ -103,7 +111,7 @@ export class Sidescroller extends Phaser.Scene {
       }
 
       //Camara que sigue a jugador
-      this.cameras.main.zoom = 2 ;
+      this.cameras.main.zoom = 2.5 ;
       this.cameras.main.startFollow(this.PlayerSprite);
     })
     
@@ -172,7 +180,7 @@ export class Sidescroller extends Phaser.Scene {
   {
     this.scene.stop('UIScene');
     this.enemigos.forEach(enemigo => enemigo.destroy);
-    this.flyEnemigos.forEach(flyenemigo => flyenemigo.destroy);
+    //this.flyEnemigos.forEach(flyenemigo => flyenemigo.destroy);
   }
 
   // Animaciones

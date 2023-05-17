@@ -21,8 +21,8 @@ export default class EnemyController
 
 		this.createAnimations();
 
-		eventos.on('enemy-stomped', this.handleStomped, this)
-    this.sprite.play('enemy-neutral');    
+		//eventos.on('enemy-stomped', this.handleStomped, this)
+    this.sprite.play('flyenemy-caminar');    
 	}
 
 
@@ -62,18 +62,18 @@ export default class EnemyController
 		this.sprite.anims.create({
 			key: 'flyenemy-caminar',
 			frameRate:12,
-      frames: [
-        {key:'flyenemy', frame:"tile_0380.png"},
-        {key:'flyenemy', frame:"tile_0381.png"}],
-      repeat:-1 //infinite
+			frames: [
+				{key:'fly-enemy', frame:"02_saw.png"},
+				{key:'fly-enemy', frame:"03_saw.png"}],
+			repeat:-1 //infinite
 		})
-
+/*
 		this.sprite.anims.create({
 			key: 'flyenemy-die',
-			frames: [{ key: 'flyenemy', frame: 'tile_0382.png' }]
-		})
+			frames: [{ key: 'fly-enemy', frame: 'tile_0382.png' }]
+		})*/
 	}
-
+/*
   private handleStomped(enemySprite: Phaser.Physics.Matter.Sprite)
 	{
 		if (this.sprite !== enemySprite) //si no es el mismo sprite que el del evento ignoramos
@@ -100,6 +100,6 @@ export default class EnemyController
   destroy() //callback
 	{
 		eventos.off('enemy-stomped', this.handleStomped, this) //por si queremos hacernos cargo de cosas extra al destruir el objeto
-	}
+	}*/
 
 }

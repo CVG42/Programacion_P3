@@ -71,18 +71,11 @@ export default class PlayerController
               this.lastEnemy = body.gameObject
               let yVelocity = this.sprite.getVelocity().y;
               yVelocity = yVelocity ?? 0;
-              if (this.sprite.y < body.position.y && yVelocity > 1)
-              {
-                // stomp on enemy
-                this.doDmgToPlayer(0,this.speed*3);
-                //debe checar si es menor porque entre menor el Y, mas alto estamos
-                eventos.emit('enemy-stomped', this.lastEnemy);          
-              }
-              else
-              {
+          
                 // hit by enemy
                 this.doDmgToPlayer(15,0);
-              }
+                this.speed = 2;
+              
               return;
             }
 
@@ -99,6 +92,14 @@ export default class PlayerController
               //console.log("joya")
               eventos.emit('joya-collected')
               sprite.destroy();
+              break;
+
+            case 'item':
+                //console.log("joya")
+                //eventos.emit('joya-collected')
+                sprite.destroy();
+                this.speed = 4;
+                break;
           }
         }) 
     }
