@@ -107,7 +107,8 @@ export default class PlayerController
     {
     this.sprite.anims.create({
       key: 'player-idle',
-      frames: [{key:'player-idle', frame:'player-idle-1.png'},{key:'player-idle', frame:'player-idle-2.png'},{key:'player-idle', frame:'player-idle-3.png'},{key:'player-idle', frame:'player-idle-4.png'}]
+      frameRate:10,
+      frames: [{key:'player-idle', frame:'player-idle-1.png'},{key:'player-idle', frame:'player-idle-2.png'},{key:'player-idle', frame:'player-idle-4.png'}]
     })
     
     this.sprite.anims.create({
@@ -117,7 +118,7 @@ export default class PlayerController
     
     this.sprite.anims.create({
       key: 'player-death',
-      frames: [{key:'player', frame:'tile_0246.png'}]
+      frames: [{key:'player-death', frame:'player-hurt-1.png'},{key:'player-death', frame:'player-hurt-2.png'}]
     })
     
     this.sprite.anims.create({

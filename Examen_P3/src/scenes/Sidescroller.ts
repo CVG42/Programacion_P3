@@ -27,19 +27,22 @@ export class Sidescroller extends Phaser.Scene {
     this.Obstaculos = new ControladorObstaculos();
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {this.destroy()});
     this.enemigos = [];
+    this.flyEnemigos = [];
   }
 
   preload() 
   {
-    this.load.atlas('player','/assets/player.png','/assets/player.json');
-    this.load.image('mapa','/assets/monochrome_tilemap_transparent_packed.png');
-    this.load.tilemapTiledJSON('tilemap','/assets/darkworld.json');
+    //this.load.image('mapa','/assets/monochrome_tilemap_transparent_packed.png');
+    this.load.image('mapa','/assets/tileset_forest.png');
+    //this.load.image('background','/assets/desert_b.png');
+    this.load.tilemapTiledJSON('tilemap','/assets/forest.json');
     this.load.image('joya-img','/assets/tile_0082.png');
     this.load.atlas('enemy', '/assets/enemy.png','/assets/enemy.json')
     this.load.atlas('fly-enemy','/assets/flyenemy.png','/assets/flyenemy.json')
     this.load.atlas('player-run','/assets/player-run.png','/assets/player-run.json')
     this.load.atlas('player-idle','/assets/player-idle.png','/assets/player-idle.json')
     this.load.atlas('player-jump','/assets/player-jump.png','/assets/player-jump.json')
+    this.load.atlas('player-death','/assets/player-death.png','/assets/player-death.json')
   }
  
   create(){
@@ -50,8 +53,12 @@ export class Sidescroller extends Phaser.Scene {
     this.scene.launch('UIScene');
     
     const map = this.make.tilemap({key:'tilemap'});
-    const tileset = map.addTilesetImage('darkworld','mapa'); //'darkworld' = conjunto de patrones en tiled
+    const tileset = map.addTilesetImage('forest','mapa'); //'darkworld' = conjunto de patrones en tiled
     const ground = map.createLayer('Suelo', tileset!);
+    //const background = this.make.tilemap({key:'tilemap'});
+    //const bg = background.addTilesetImage('desert','background');
+    //const fondo = background.createLayer('Fondo', bg!);
+    
 
     //colisiones de Tilemap
     ground?.setCollisionByProperty({collides:true});
@@ -68,7 +75,7 @@ export class Sidescroller extends Phaser.Scene {
           //this.PlayerSprite = this.matter.add.sprite(x+(width*.05),y,'player').setFixedRotation().play('player-idle'); //setFixedRotation para que no rote
           //this.PlayerSprite.setOnCollide((data: MatterJS.ICollisionPair) => {this.grounded = true}) //detectar si esta en el suelo
 
-          this.PlayerSprite = this.matter.add.sprite(x + (width * .05), y, 'player').play('player-idle').setFixedRotation();
+          this.PlayerSprite = this.matter.add.sprite(x + (width * .05), y, 'player-idle').play('player-idle').setFixedRotation();
           this.Player = new PlayerController(this.PlayerSprite, this.cursors!,x +(width*.05), y, this.cameras.main, this, this.Obstaculos);
         break;
         
