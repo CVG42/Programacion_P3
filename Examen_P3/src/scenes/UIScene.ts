@@ -4,9 +4,11 @@ import { instancia as eventos } from './EventCenter';
 export class UIScene extends Phaser.Scene {
   private barraSalud!: Phaser.GameObjects.Graphics;
   private joyasLabel!: Phaser.GameObjects.Text;
+  private scoreLabel!: Phaser.GameObjects.Text;
   
   private ultimaSalud: number = 100;
   joyasCollected: number = 0;
+  score: number = 0;
  
   constructor() { 
     super('UIScene') 
@@ -24,13 +26,20 @@ export class UIScene extends Phaser.Scene {
       fontFamily:'Segoe UI'
 		})
 
+    this.scoreLabel = this.add.text(600, 10, 'Score: 0000', {
+			fontSize: '32px',
+      fontFamily:'Segoe UI'
+		})
+
     eventos.on('player-took-damage', this.barraSaludHandler,this);
 
     eventos.on('joya-collected', this.joyaHandler, this);
+    eventos.on('enemy-killed', this.scoreHandler, this);
 
 		this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => { 
       //para que no se esten añadiendo eventos cada vez que la escena se reinicie
 			eventos.off('joya-collected', this.joyaHandler, this)//clereamos la referencia de las joyas aqui
+      eventos.off('enemy-killed', this.scoreHandler, this)
 		})
   }
 
@@ -70,5 +79,10 @@ export class UIScene extends Phaser.Scene {
   private joyaHandler(){ //manejamos el evento de joya-collected
     ++this.joyasCollected
 		this.joyasLabel.text = `Joyas: ${this.joyasCollected}`
+  }
+
+  private scoreHandler(){ //manejamos el evento de joya-collected
+    this.score += 15;
+		this.scoreLabel.text = `Score: 00${this.score}`
   }
 }

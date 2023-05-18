@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Sidescroller } from "./scenes/Sidescroller";
 import { UIScene } from "./scenes/UIScene";
 import GameOver from "./scenes/GameOver";
+import Victory from "./scenes/Victory";
 
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -17,7 +18,7 @@ const config: Phaser.Types.Core.GameConfig = {
       debug: true
     }
   },
-  scene: [ Sidescroller, UIScene, GameOver ]
+  scene: [ Sidescroller, UIScene, GameOver, Victory ]
 }
 
 export default new Phaser.Game(config);

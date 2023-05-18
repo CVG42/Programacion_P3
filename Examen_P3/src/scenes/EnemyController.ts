@@ -103,7 +103,7 @@ export default class EnemyController
 
     this.scene.tweens.add({ //animacion que lo apachurra cada vez mas
 			targets: this.sprite,
-			duration: 200,
+			duration: 1000,
 			onComplete: () => {
 				this.sprite.destroy() //destruimos y ya no podremos usar denuevo
 			}

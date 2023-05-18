@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser, { Sound } from "phaser";
 import { instancia as eventos } from "./EventCenter";
 import ControladorObstaculos from "./ControladorObstaculos";
 
@@ -17,6 +17,9 @@ export default class PlayerController
     private death: boolean = false;
     private obstaculos!: ControladorObstaculos;
     private lastEnemy?: Phaser.Physics.Matter.Sprite;
+ 
+   
+
     
     constructor(sprite: Phaser.Physics.Matter.Sprite, cursors: Phaser.Types.Input.Keyboard.CursorKeys, x: number, y: number, camera: Phaser.Cameras.Scene2D.Camera, scene: Phaser.Scene, obstaculos: ControladorObstaculos)
     {
@@ -54,14 +57,17 @@ export default class PlayerController
               yVelocity = yVelocity ?? 0;
               if (this.sprite.y < body.position.y && yVelocity > 1)
               {
+                this.doDmgToPlayer(0,this.speed*3);
                 // stomp on enemy
                 //debe checar si es menor porque entre menor el Y, mas alto estamos
-                eventos.emit('enemy-stomped', this.lastEnemy);          
+                eventos.emit('enemy-stomped', this.lastEnemy);   
+                eventos.emit('enemy-killed');       
               }
               else
               {
                 // hit by enemy
                 this.doDmgToPlayer(15,0);
+                this.speed = 2;
               }
               return;
             }
@@ -71,10 +77,21 @@ export default class PlayerController
               this.lastEnemy = body.gameObject
               let yVelocity = this.sprite.getVelocity().y;
               yVelocity = yVelocity ?? 0;
+              this.speed = 2; 
           
+              if (this.sprite.y < body.position.y && yVelocity > 1)
+              {
+                // stomp on enemy
+                this.doDmgToPlayer(15,this.speed*3);
+                //debe checar si es menor porque entre menor el Y, mas alto estamos
+                //this.speed = 2;         
+              }
+              else
+              {
                 // hit by enemy
                 this.doDmgToPlayer(15,0);
-                this.speed = 2;
+                //this.speed = 2;
+              }
               
               return;
             }
@@ -100,9 +117,19 @@ export default class PlayerController
                 sprite.destroy();
                 this.speed = 4;
                 break;
+            
+            case 'win-item':
+                //console.log("joya")
+                //eventos.emit('joya-collected')
+                sprite.destroy();
+                this.speed = 0;
+                this.scene.time.delayedCall(1500,()=>{this.scene.scene.start('victory')})
+                break;
           }
         }) 
     }
+
+
     
     private createAnimacionesJugador()
     {

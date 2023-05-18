@@ -34,10 +34,11 @@ export class Sidescroller extends Phaser.Scene {
   {
     //this.load.image('mapa','/assets/monochrome_tilemap_transparent_packed.png');
     this.load.image('mapa','/assets/tileset_forest.png');
-    this.load.image('background','/assets/desert_b.png');
+    this.load.image('background','/assets/back.png');
     this.load.tilemapTiledJSON('tilemap','/assets/forest.json');
     this.load.image('joya-img','/assets/gem-1.png');
     this.load.image('item-img','/assets/cherry-1.png');
+    this.load.image('win-img','/assets/win.png');
     this.load.atlas('enemy', '/assets/opposum.png','/assets/opposum.json')
     this.load.atlas('enemy-death', '/assets/death-e.png','/assets/death-e.json')
     this.load.atlas('fly-enemy','/assets/saw.png','/assets/saw.json')
@@ -45,6 +46,7 @@ export class Sidescroller extends Phaser.Scene {
     this.load.atlas('player-idle','/assets/player-idle.png','/assets/player-idle.json')
     this.load.atlas('player-jump','/assets/player-jump.png','/assets/player-jump.json')
     this.load.atlas('player-death','/assets/player-death.png','/assets/player-death.json')
+    //this.load.audio('jump-sfx',['/assets/jump.mp3']);
   }
  
   create(){
@@ -54,8 +56,9 @@ export class Sidescroller extends Phaser.Scene {
     //para cargar otra escena al mismo tiempo, en este caso de UI
     this.scene.launch('UIScene');
 
+
     const background = this.make.tilemap({key:'tilemap'});
-    const bg = background.addTilesetImage('desert','background');
+    const bg = background.addTilesetImage('sky','background');
     const fondo = background.createLayer('Fondo', bg!);
     const map = this.make.tilemap({key:'tilemap'});
     const tileset = map.addTilesetImage('forest','mapa'); //'darkworld' = conjunto de patrones en tiled
@@ -78,6 +81,17 @@ export class Sidescroller extends Phaser.Scene {
           //this.PlayerSprite.setOnCollide((data: MatterJS.ICollisionPair) => {this.grounded = true}) //detectar si esta en el suelo
 
           this.PlayerSprite = this.matter.add.sprite(x + (width * .05), y, 'player-idle').play('player-idle').setFixedRotation();
+
+          this.PlayerSprite.body.vertices[0].y= y-3; //AQUI MODIFICO EL VERTICE DEL COLLIDER SUPERIOR IZQUIERDO
+          this.PlayerSprite.body.vertices[1].y= y-3;
+          this.PlayerSprite.body.vertices[0].x= x-5;
+          this.PlayerSprite.body.vertices[1].x= x-5;
+          this.PlayerSprite.body.vertices[2].x= x+5;
+          this.PlayerSprite.body.vertices[3].x= x+5;
+    
+          
+          
+
           this.Player = new PlayerController(this.PlayerSprite, this.cursors!,x +(width*.05), y, this.cameras.main, this, this.Obstaculos);
         break;
         
@@ -91,6 +105,12 @@ export class Sidescroller extends Phaser.Scene {
           const item = this.matter.add.sprite(x! + (width * 0.5), y! + (height * 0.5), 'item-img', undefined, {isSensor:true,isStatic:true})
           //isSensor = isTrigger de unity
           item.setData('tipo','item')
+        break;
+
+        case 'Win':
+          const winItem = this.matter.add.sprite(x! + (width * 0.5), y! + (height * 0.5), 'win-img', undefined, {isSensor:true,isStatic:true})
+          //isSensor = isTrigger de unity
+          winItem.setData('tipo','win-item')
         break;
 
         case 'picos':
