@@ -44,11 +44,13 @@ export default class PlayerController
           this.grounded = true;
           const body = data.bodyB as MatterJS.BodyType
 
+          /*
           if(this, this.obstaculos.is('picos', body))
           {
             this.doDmgToPlayer(10,this.speed*3);
             return;
           }
+          */
 
           if (this.obstaculos.is('enemigos', body)) //#4
             {
@@ -68,6 +70,26 @@ export default class PlayerController
                 // hit by enemy
                 this.doDmgToPlayer(15,0);
                 this.speed = 2;
+              }
+              return;
+            }
+
+            if (this.obstaculos.is('eagles', body)) //#4
+            {
+              this.lastEnemy = body.gameObject
+              let yVelocity = this.sprite.getVelocity().y;
+              yVelocity = yVelocity ?? 0;
+              if (this.sprite.y < body.position.y && yVelocity > 1) 
+              {
+                // stomp on enemy
+                this.doDmgToPlayer(0,this.speed*3);
+                //debe checar si es menor porque entre menor el Y, mas alto estamos
+                eventos.emit('enemy-stomped', this.lastEnemy);          
+              }
+              else
+              {
+                // hit by enemy
+                this.doDmgToPlayer(15,0);
               }
               return;
             }
@@ -131,7 +153,7 @@ export default class PlayerController
                 //eventos.emit('joya-collected')
                 sprite.destroy();
                 this.speed = 0;
-                this.scene.time.delayedCall(1500,()=>{this.scene.scene.start('victory')})
+                this.scene.time.delayedCall(0,()=>{this.scene.scene.start('victory')})
                 break;
           }
         }) 
@@ -250,7 +272,7 @@ export default class PlayerController
             this.camera.startFollow(this.sprite);
             this.fallen=false;
             this.sprite.setVelocity(0,-5);
-            this.doDmgToPlayer(25,0);
+            this.doDmgToPlayer(100,0);
           },1500)
         }
         //else(this.camera.startFollow(this.sprite))
@@ -267,6 +289,7 @@ export default class PlayerController
       {
         this.death = true;
         this.sprite.play('player-death');
+        eventos.emit('reset')
         this.sprite.setOnCollide(()=>{})
         this.scene.time.delayedCall(1500,()=>{this.scene.scene.start('game-over')})
       }

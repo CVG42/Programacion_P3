@@ -5,6 +5,8 @@ import EnemyController from "./EnemyController";
 import FlyEnemyController from "./FlyingEnemyController";
 import Water from "./Water";
 import Coin from "./Coin";
+import EagleController from "./EagleController";
+
 
 export class Sidescroller extends Phaser.Scene {
   private PlayerSprite!: Phaser.Physics.Matter.Sprite;
@@ -18,6 +20,7 @@ export class Sidescroller extends Phaser.Scene {
   private flyEnemigos: FlyEnemyController[] = [];
   private water: Water[] = [];
   private coin: Coin[] = [];
+  private eagles: EagleController[] = [];
 
   
   constructor() { 
@@ -33,12 +36,13 @@ export class Sidescroller extends Phaser.Scene {
     this.flyEnemigos = [];
     this.water = [];
     this.coin = [];
+    this.eagles = [];
   }
 
   preload() 
   {
     //this.load.image('mapa','/assets/monochrome_tilemap_transparent_packed.png');
-    this.load.image('mapa','/assets/tileset_forest.png');
+    this.load.image('mapa','/assets/tileset.png');
     this.load.image('background','/assets/back.png');
     this.load.tilemapTiledJSON('tilemap','/assets/forest.json');
     this.load.image('joya-img','/assets/gem-1.png');
@@ -47,6 +51,7 @@ export class Sidescroller extends Phaser.Scene {
     this.load.atlas('enemy', '/assets/opposum.png','/assets/opposum.json')
     this.load.atlas('enemy-death', '/assets/death-e.png','/assets/death-e.json')
     this.load.atlas('fly-enemy','/assets/saw.png','/assets/saw.json')
+    this.load.atlas('eagle','/assets/eagle.png','/assets/eagle.json')
     this.load.atlas('player-run','/assets/player-run.png','/assets/player-run.json')
     this.load.atlas('player-idle','/assets/player-idle.png','/assets/player-idle.json')
     this.load.atlas('player-jump','/assets/player-jump.png','/assets/player-jump.json')
@@ -68,7 +73,7 @@ export class Sidescroller extends Phaser.Scene {
     const bg = background.addTilesetImage('sky','background');
     const fondo = background.createLayer('Fondo', bg!);
     const map = this.make.tilemap({key:'tilemap'});
-    const tileset = map.addTilesetImage('forest','mapa'); //'darkworld' = conjunto de patrones en tiled
+    const tileset = map.addTilesetImage('other','mapa'); //'darkworld' = conjunto de patrones en tiled
     const ground = map.createLayer('Suelo', tileset!);
     
 
@@ -89,13 +94,14 @@ export class Sidescroller extends Phaser.Scene {
 
           this.PlayerSprite = this.matter.add.sprite(x + (width * .05), y, 'player-idle').play('player-idle').setFixedRotation();
 
+          
           this.PlayerSprite.body.vertices[0].y= y-3; //AQUI MODIFICO EL VERTICE DEL COLLIDER SUPERIOR IZQUIERDO
           this.PlayerSprite.body.vertices[1].y= y-3;
           this.PlayerSprite.body.vertices[0].x= x-5;
           this.PlayerSprite.body.vertices[1].x= x-5;
           this.PlayerSprite.body.vertices[2].x= x+5;
           this.PlayerSprite.body.vertices[3].x= x+5;
-    
+          
           
           
 
@@ -128,7 +134,7 @@ export class Sidescroller extends Phaser.Scene {
         break;
 
         case 'picos':
-          const pico = this.matter.add.rectangle(x! + (width * 0.5), y! + (height * 0.5), width,height, {isStatic:true})
+          const pico = this.matter.add.polygon(x! + (width * 0.5), y! + (height * 0.5), width,height, {isStatic:true})
           this.Obstaculos.add('picos',pico);
         break;
 
@@ -142,6 +148,12 @@ export class Sidescroller extends Phaser.Scene {
           const flyEnemySprite = this.matter.add.sprite(x + (width * .05), y, 'fly-enemy', undefined, {isStatic:true});         
           this.flyEnemigos.push(new FlyEnemyController(this,flyEnemySprite));
           this.Obstaculos.add('flyEnemigos', flyEnemySprite.body as MatterJS.BodyType);
+          break;
+
+          case 'eagle':
+          const eagleSprite = this.matter.add.sprite(x + (width * .05), y, 'eagle', undefined, {isStatic:true});         
+          this.eagles.push(new EagleController(this,eagleSprite));
+          this.Obstaculos.add('eagles', eagleSprite.body as MatterJS.BodyType);
           break;
 
           case 'water':
@@ -166,6 +178,7 @@ export class Sidescroller extends Phaser.Scene {
     this.Player.update(delta);
     this.enemigos.forEach(enemigo => enemigo.update(delta));
     this.flyEnemigos.forEach(flyenemigo => flyenemigo.update(delta))
+    this.eagles.forEach(eagle => eagle.update(delta))
   
     //Movimiento
     /*
@@ -220,7 +233,7 @@ export class Sidescroller extends Phaser.Scene {
   {
     this.scene.stop('UIScene');
     this.enemigos.forEach(enemigo => enemigo.destroy);
-    //this.flyEnemigos.forEach(flyenemigo => flyenemigo.destroy);
+    this.eagles.forEach(eagle => eagle.destroy);
   }
 
   // Animaciones

@@ -58,11 +58,13 @@ export class UIScene extends Phaser.Scene {
     eventos.on('jump', this.Jump, this);
     eventos.on('coin', this.Coin, this);
     eventos.on('gem', this.Gem, this);
+    eventos.on('reset',this.Reset,this);
 
 		this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => { 
       //para que no se esten añadiendo eventos cada vez que la escena se reinicie
 			eventos.off('joya-collected', this.joyaHandler, this)//clereamos la referencia de las joyas aqui
       eventos.off('enemy-killed', this.scoreHandler, this)
+      eventos.off('reset',this.Reset,this);
 		})
   }
 
@@ -119,5 +121,11 @@ export class UIScene extends Phaser.Scene {
 
   private Gem(){ //manejamos el evento de joya-collected
     this.gemFX.play();
+  }
+
+  private Reset()
+  {
+    this.joyasCollected = 0;
+    this.score = 0;
   }
 }

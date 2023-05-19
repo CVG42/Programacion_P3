@@ -1,0 +1,115 @@
+{
+  "frames": [
+    {
+      "filename": "00_eagle-attack.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 39
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 3,
+        "y": 0,
+        "w": 32,
+        "h": 39
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 41
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "01_eagle-attack.png",
+      "frame": {
+        "x": 0,
+        "y": 39,
+        "w": 35,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 3,
+        "y": 6,
+        "w": 35,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 41
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "02_eagle-attack.png",
+      "frame": {
+        "x": 32,
+        "y": 0,
+        "w": 28,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 2,
+        "y": 14,
+        "w": 28,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 41
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "03_eagle-attack.png",
+      "frame": {
+        "x": 0,
+        "y": 71,
+        "w": 31,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 2,
+        "y": 15,
+        "w": 31,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 41
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "eagle.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 60,
+      "h": 95
+    },
+    "scale": 1
+  }
+}

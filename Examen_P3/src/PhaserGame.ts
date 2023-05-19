@@ -7,7 +7,7 @@ import Victory from "./scenes/Victory";
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  backgroundColor: '#333333',
+  backgroundColor: '#47F3FF',
   width: 800,
   height: 600,
   pixelArt: true,
