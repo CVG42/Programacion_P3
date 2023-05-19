@@ -5,6 +5,9 @@ export class UIScene extends Phaser.Scene {
   private barraSalud!: Phaser.GameObjects.Graphics;
   private joyasLabel!: Phaser.GameObjects.Text;
   private scoreLabel!: Phaser.GameObjects.Text;
+  private sonidoFX!: Phaser.Sound.BaseSound | any;
+  private coinFX!: Phaser.Sound.BaseSound | any;
+  private gemFX!: Phaser.Sound.BaseSound | any;
   
   private ultimaSalud: number = 100;
   joyasCollected: number = 0;
@@ -15,9 +18,26 @@ export class UIScene extends Phaser.Scene {
   }
 
   preload(){
+    this.load.audio('jump-sfx',['/assets/jump.mp3']);
+    this.load.audio('coin-sfx',['/assets/coin.mp3']);
+    this.load.audio('gem-sfx',['/assets/gem.mp3']);
   }
  
   create(){
+
+    this.sonidoFX = this.sound.add('jump-sfx');
+        
+        this.sonidoFX.rate = 1;
+        this.sonidoFX.volume = 0.5;
+
+        this.coinFX = this.sound.add('coin-sfx');
+        this.coinFX.rate = 1;
+        this.coinFX.volume = 1;
+
+        this.gemFX = this.sound.add('gem-sfx');
+        this.gemFX.rate = 1;
+        this.gemFX.volume = 0.5;
+
     this.barraSalud = this.add.graphics();
     this.setBarraSalud(100);
 
@@ -35,6 +55,9 @@ export class UIScene extends Phaser.Scene {
 
     eventos.on('joya-collected', this.joyaHandler, this);
     eventos.on('enemy-killed', this.scoreHandler, this);
+    eventos.on('jump', this.Jump, this);
+    eventos.on('coin', this.Coin, this);
+    eventos.on('gem', this.Gem, this);
 
 		this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => { 
       //para que no se esten añadiendo eventos cada vez que la escena se reinicie
@@ -84,5 +107,17 @@ export class UIScene extends Phaser.Scene {
   private scoreHandler(){ //manejamos el evento de joya-collected
     this.score += 15;
 		this.scoreLabel.text = `Score: 00${this.score}`
+  }
+
+  private Jump(){ //manejamos el evento de joya-collected
+    this.sonidoFX.play();
+  }
+
+  private Coin(){ //manejamos el evento de joya-collected
+    this.coinFX.play();
+  }
+
+  private Gem(){ //manejamos el evento de joya-collected
+    this.gemFX.play();
   }
 }

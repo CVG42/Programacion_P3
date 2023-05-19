@@ -107,7 +107,15 @@ export default class PlayerController
           {
             case 'joya':
               //console.log("joya")
+              eventos.emit('gem'); 
               eventos.emit('joya-collected')
+              sprite.destroy();
+              break;
+
+              case 'coin':
+              //console.log("joya")
+              eventos.emit('coin')
+              eventos.emit('enemy-killed')
               sprite.destroy();
               break;
 
@@ -219,6 +227,7 @@ export default class PlayerController
         const espacio = Phaser.Input.Keyboard.JustDown(this.cursors!.space);
         if(espacio && this.grounded)
         {
+          eventos.emit('jump')
             this.sprite.setVelocityY(-this.speed*3).play('player-jump');
             this.grounded = false;
         }

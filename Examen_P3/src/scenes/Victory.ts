@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-export default class GameOver extends Phaser.Scene
+export default class Victory extends Phaser.Scene
 {
 	constructor()
 	{

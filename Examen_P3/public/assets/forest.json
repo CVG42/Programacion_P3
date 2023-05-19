@@ -134,6 +134,61 @@
                  "width":15.5,
                  "x":480.25,
                  "y":144.25
+                }, 
+                {
+                 "height":15.8182,
+                 "id":12,
+                 "name":"water",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.8182,
+                 "x":170.7159,
+                 "y":272.3409
+                }, 
+                {
+                 "height":15.8182,
+                 "id":15,
+                 "name":"water",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.8182,
+                 "x":159.2159,
+                 "y":272.4659
+                }, 
+                {
+                 "height":15.8182,
+                 "id":13,
+                 "name":"water",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.8182,
+                 "x":188.9659,
+                 "y":272.272718181818
+                }, 
+                {
+                 "height":15.8182,
+                 "id":14,
+                 "name":"water",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.8182,
+                 "x":206.772718181818,
+                 "y":272.397718181818
+                }, 
+                {
+                 "height":15.6666666666667,
+                 "id":16,
+                 "name":"coin",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":352.333333333333,
+                 "y":160
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -142,7 +197,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":10,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

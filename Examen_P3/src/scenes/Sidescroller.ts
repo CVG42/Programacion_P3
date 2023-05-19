@@ -3,7 +3,8 @@ import PlayerController from "./PlayerController";
 import ControladorObstaculos from "./ControladorObstaculos";
 import EnemyController from "./EnemyController";
 import FlyEnemyController from "./FlyingEnemyController";
-
+import Water from "./Water";
+import Coin from "./Coin";
 
 export class Sidescroller extends Phaser.Scene {
   private PlayerSprite!: Phaser.Physics.Matter.Sprite;
@@ -15,6 +16,8 @@ export class Sidescroller extends Phaser.Scene {
 
   private Obstaculos!: ControladorObstaculos;
   private flyEnemigos: FlyEnemyController[] = [];
+  private water: Water[] = [];
+  private coin: Coin[] = [];
 
   
   constructor() { 
@@ -28,6 +31,8 @@ export class Sidescroller extends Phaser.Scene {
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {this.destroy()});
     this.enemigos = [];
     this.flyEnemigos = [];
+    this.water = [];
+    this.coin = [];
   }
 
   preload() 
@@ -46,6 +51,8 @@ export class Sidescroller extends Phaser.Scene {
     this.load.atlas('player-idle','/assets/player-idle.png','/assets/player-idle.json')
     this.load.atlas('player-jump','/assets/player-jump.png','/assets/player-jump.json')
     this.load.atlas('player-death','/assets/player-death.png','/assets/player-death.json')
+    this.load.atlas('water','/assets/water.png','/assets/water.json')
+    this.load.atlas('coin','/assets/coin.png','/assets/coin.json')
     //this.load.audio('jump-sfx',['/assets/jump.mp3']);
   }
  
@@ -101,6 +108,13 @@ export class Sidescroller extends Phaser.Scene {
           joya.setData('tipo','joya')
         break;
 
+        case 'coin':
+          const coins = this.matter.add.sprite(x! + (width * 0.5), y! + (height * 0.5), 'coin', undefined, {isSensor:true,isStatic:true})
+          //isSensor = isTrigger de unity
+          coins.setData('tipo','coin')
+          this.coin.push(new Coin(this,coins));
+        break;
+
         case 'Item':
           const item = this.matter.add.sprite(x! + (width * 0.5), y! + (height * 0.5), 'item-img', undefined, {isSensor:true,isStatic:true})
           //isSensor = isTrigger de unity
@@ -128,6 +142,12 @@ export class Sidescroller extends Phaser.Scene {
           const flyEnemySprite = this.matter.add.sprite(x + (width * .05), y, 'fly-enemy', undefined, {isStatic:true});         
           this.flyEnemigos.push(new FlyEnemyController(this,flyEnemySprite));
           this.Obstaculos.add('flyEnemigos', flyEnemySprite.body as MatterJS.BodyType);
+          break;
+
+          case 'water':
+            const waterSprite = this.matter.add.sprite(x + (width * .05), y, 'water', undefined, {isSensor:true, isStatic:true});         
+            this.water.push(new Water(this,waterSprite));
+            break;
       }
 
       //Camara que sigue a jugador
