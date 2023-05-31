@@ -11,7 +11,7 @@ function doThreeJS()
   const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 
-  scene.background = new THREE.Color(0.8,0.5,0.9); //new THREE.Color( 'skyblue' );
+  scene.background = new THREE.Color(0.8,0.5,0.9);
 
   
   const spotLight = new THREE.SpotLight(0xfffffff);
@@ -27,8 +27,8 @@ function doThreeJS()
     const ambientLight = new THREE.AmbientLight(0x99aaff,1);
     scene.add(ambientLight);
 
-    const gridHelper = new THREE.GridHelper(10,10);
-    scene.add(gridHelper);
+    //const gridHelper = new THREE.GridHelper(10,10);
+    //scene.add(gridHelper);
 
     scene.fog = new THREE.Fog(0xe7bcf3, 5, 100);
 
@@ -59,7 +59,7 @@ function doThreeJS()
     cube2.castShadow = true;
 
     //SPAWN CUBOS
-    for (let i = 0; i < (6); i++ )
+    for (let i = 0; i < 20; i++ )
     {   
       const geometry = new THREE.BoxGeometry( .8, .8, .8 );
       let randomColor = new THREE.MeshPhongMaterial( { color: "#"+ Math.floor(Math.random()*16777215).toString(16) } );
